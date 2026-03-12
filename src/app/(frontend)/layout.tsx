@@ -12,7 +12,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <main>{children}</main>
+      <h1 className={'text-2xl'}>Hello world</h1>
+        {/*<main>{children}</main>*/}
       </body>
     </html>
   )
