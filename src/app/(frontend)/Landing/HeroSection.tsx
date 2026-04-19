@@ -1,6 +1,5 @@
-import CountUpClient from '@/app/(frontend)/Landing/CountUpClient'
-import HeroGlow from '@/app/(frontend)/Landing/HeroGlow'
 import TypedDescription from '@/app/(frontend)/Landing/TypedDescription'
+import VisitCounter from '@/app/(frontend)/Landing/VisitCounter'
 import type { Locale } from '@/i18n/config'
 import { getTranslations } from '@/i18n/translations'
 
@@ -15,14 +14,10 @@ export default function HeroSection({ aboutMe, locale, visitsCount }: HeroSectio
 
   return (
     <section className={'snap-section relative min-h-screen overflow-hidden'}>
-      <div className={'pointer-events-none absolute inset-0 z-0 overflow-hidden'}>
-        <HeroGlow />
-      </div>
-
       <div className={'relative z-10 mx-auto flex min-h-screen max-w-[1400px] items-center px-6 py-20 md:px-10 md:py-0'}>
         <div className={'w-full max-w-6xl'}>
           <p className={'font-jetbrains-mono pb-4 text-orange-400'}>
-            {t.visitorPrefix} <CountUpClient count={visitsCount} /> {t.visitorSuffix}
+            {t.visitorPrefix} <VisitCounter initialCount={visitsCount} /> {t.visitorSuffix}
           </p>
           <h1 className={'mb-4 text-4xl font-semibold sm:text-5xl md:text-6xl'}>
             {t.introPrefix}{' '}

@@ -69,9 +69,14 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'certificate-scans': CertificateScan;
     visits: Visit;
     skills: Skill;
     projects: Project;
+    people: Person;
+    experiences: Experience;
+    certificates: Certificate;
+    commands: Command;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -81,9 +86,14 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'certificate-scans': CertificateScansSelect<false> | CertificateScansSelect<true>;
     visits: VisitsSelect<false> | VisitsSelect<true>;
     skills: SkillsSelect<false> | SkillsSelect<true>;
     projects: ProjectsSelect<false> | ProjectsSelect<true>;
+    people: PeopleSelect<false> | PeopleSelect<true>;
+    experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
+    certificates: CertificatesSelect<false> | CertificatesSelect<true>;
+    commands: CommandsSelect<false> | CommandsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -173,6 +183,25 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificate-scans".
+ */
+export interface CertificateScan {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "visits".
  */
 export interface Visit {
@@ -189,18 +218,450 @@ export interface Skill {
   id: number;
   name: string;
   icon:
+    | 'cloud'
+    | 'server'
+    | 'database'
+    | 'api'
+    | 'backend'
+    | 'frontend'
+    | 'mobile'
+    | 'desktop'
+    | 'security'
+    | 'devops'
+    | 'infrastructure'
+    | 'networking'
+    | 'automation'
+    | 'ai'
+    | 'analytics'
+    | 'design'
+    | 'product'
+    | 'management'
+    | 'documentation'
+    | 'collaboration'
+    | 'performance'
+    | 'search'
+    | 'storage'
+    | 'hosting'
+    | 'cli'
+    | 'cms'
+    | 'architecture'
+    | 'operations'
+    | 'testing'
+    | 'monitoring'
+    | 'observability'
+    | 'deployment'
+    | 'integration'
+    | 'workflow'
+    | 'research'
+    | 'seo'
+    | 'marketing'
+    | 'sales'
+    | 'crm'
+    | 'finance'
+    | 'support'
+    | 'qa'
+    | 'data'
+    | 'machine-learning'
+    | 'ui-ux'
+    | 'html5'
+    | 'css3'
+    | 'sass'
     | 'react'
+    | 'redux'
     | 'nextjs'
+    | 'vite'
     | 'typescript'
     | 'javascript'
     | 'nodejs'
-    | 'payload'
+    | 'nestjs'
+    | 'prisma'
+    | 'mongodb'
+    | 'mysql'
     | 'postgresql'
+    | 'redis'
+    | 'graphql'
+    | 'firebase'
     | 'tailwind'
     | 'docker'
     | 'git'
+    | 'github'
+    | 'linux'
+    | 'vitest'
+    | 'notion'
+    | 'figma'
+    | 'discord'
     | 'python'
-    | 'cpp';
+    | 'php'
+    | 'laravel'
+    | 'java'
+    | 'dotnet'
+    | 'cpp'
+    | 'AbletonDark'
+    | 'AbletonLight'
+    | 'ActivityPubDark'
+    | 'ActivityPubLight'
+    | 'ActixDark'
+    | 'ActixLight'
+    | 'Adonis'
+    | 'AfterEffects'
+    | 'AiScriptDark'
+    | 'AiScriptLight'
+    | 'AlpineJSDark'
+    | 'AlpineJSLight'
+    | 'AnacondaDark'
+    | 'AnacondaLight'
+    | 'AndroidStudioDark'
+    | 'AndroidStudioLight'
+    | 'AngularDark'
+    | 'AngularLight'
+    | 'Ansible'
+    | 'Apollo'
+    | 'AppleDark'
+    | 'AppleLight'
+    | 'Appwrite'
+    | 'ArchDark'
+    | 'ArchLight'
+    | 'Arduino'
+    | 'Astro'
+    | 'Atom'
+    | 'Audition'
+    | 'AutoCADDark'
+    | 'AutoCADLight'
+    | 'AWSDark'
+    | 'AWSLight'
+    | 'Azul'
+    | 'AzureDark'
+    | 'AzureLight'
+    | 'Babel'
+    | 'BashDark'
+    | 'BashLight'
+    | 'BevyDark'
+    | 'BevyLight'
+    | 'BitBucketDark'
+    | 'BitBucketLight'
+    | 'BlenderDark'
+    | 'BlenderLight'
+    | 'Bootstrap'
+    | 'BSDDark'
+    | 'BSDLight'
+    | 'BunDark'
+    | 'BunLight'
+    | 'C'
+    | 'CLionDark'
+    | 'CLionLight'
+    | 'CMakeDark'
+    | 'CMakeLight'
+    | 'CS'
+    | 'CassandraDark'
+    | 'CassandraLight'
+    | 'ClojureDark'
+    | 'ClojureLight'
+    | 'CloudflareDark'
+    | 'CloudflareLight'
+    | 'CodePenDark'
+    | 'CodePenLight'
+    | 'CoffeeScriptDark'
+    | 'CoffeeScriptLight'
+    | 'CrystalDark'
+    | 'CrystalLight'
+    | 'CypressDark'
+    | 'CypressLight'
+    | 'D3Dark'
+    | 'D3Light'
+    | 'DartDark'
+    | 'DartLight'
+    | 'DebianDark'
+    | 'DebianLight'
+    | 'DENODark'
+    | 'DENOLight'
+    | 'DevToDark'
+    | 'DevToLight'
+    | 'DiscordBots'
+    | 'DiscordJSDark'
+    | 'DiscordJSLight'
+    | 'Django'
+    | 'DynamoDBDark'
+    | 'DynamoDBLight'
+    | 'EclipseDark'
+    | 'EclipseLight'
+    | 'ElasticsearchDark'
+    | 'ElasticsearchLight'
+    | 'Electron'
+    | 'ElixirDark'
+    | 'ElixirLight'
+    | 'ElysiaDark'
+    | 'ElysiaLight'
+    | 'Emacs'
+    | 'Ember'
+    | 'EmotionDark'
+    | 'EmotionLight'
+    | 'ExpressJSDark'
+    | 'ExpressJSLight'
+    | 'FastAPI'
+    | 'FediverseDark'
+    | 'FediverseLight'
+    | 'FigmaLight'
+    | 'FirebaseLight'
+    | 'FlaskDark'
+    | 'FlaskLight'
+    | 'FlutterDark'
+    | 'FlutterLight'
+    | 'Forth'
+    | 'Fortran'
+    | 'GameMakerStudio'
+    | 'Gatsby'
+    | 'GCPDark'
+    | 'GCPLight'
+    | 'GherkinDark'
+    | 'GherkinLight'
+    | 'GitLabDark'
+    | 'GitLabLight'
+    | 'GithubActionsDark'
+    | 'GithubActionsLight'
+    | 'GithubLight'
+    | 'GmailDark'
+    | 'GmailLight'
+    | 'GoLang'
+    | 'GodotDark'
+    | 'GodotLight'
+    | 'GradleDark'
+    | 'GradleLight'
+    | 'GrafanaDark'
+    | 'GrafanaLight'
+    | 'GraphQLLight'
+    | 'GTKDark'
+    | 'GTKLight'
+    | 'Gulp'
+    | 'HaskellDark'
+    | 'HaskellLight'
+    | 'HaxeDark'
+    | 'HaxeFlixelDark'
+    | 'HaxeFlixelLight'
+    | 'HaxeLight'
+    | 'Heroku'
+    | 'HibernateDark'
+    | 'HibernateLight'
+    | 'HtmxDark'
+    | 'HtmxLight'
+    | 'IdeaDark'
+    | 'IdeaLight'
+    | 'Illustrator'
+    | 'Instagram'
+    | 'IPFSDark'
+    | 'IPFSLight'
+    | 'JQuery'
+    | 'JavaLight'
+    | 'JenkinsDark'
+    | 'JenkinsLight'
+    | 'Jest'
+    | 'JuliaDark'
+    | 'JuliaLight'
+    | 'Kafka'
+    | 'KaliDark'
+    | 'KaliLight'
+    | 'KotlinDark'
+    | 'KotlinLight'
+    | 'KtorDark'
+    | 'KtorLight'
+    | 'Kubernetes'
+    | 'LaTeXDark'
+    | 'LaTeXLight'
+    | 'LaravelLight'
+    | 'LessDark'
+    | 'LessLight'
+    | 'LinkedIn'
+    | 'LinuxLight'
+    | 'LitDark'
+    | 'LitLight'
+    | 'LuaDark'
+    | 'LuaLight'
+    | 'MarkdownDark'
+    | 'MarkdownLight'
+    | 'MastodonDark'
+    | 'MastodonLight'
+    | 'MaterialUIDark'
+    | 'MaterialUILight'
+    | 'MatlabDark'
+    | 'MatlabLight'
+    | 'MavenDark'
+    | 'MavenLight'
+    | 'MintDark'
+    | 'MintLight'
+    | 'MisskeyDark'
+    | 'MisskeyLight'
+    | 'MySQLLight'
+    | 'NeoVimDark'
+    | 'NeoVimLight'
+    | 'NestJSLight'
+    | 'NetlifyDark'
+    | 'NetlifyLight'
+    | 'NextJSLight'
+    | 'Nginx'
+    | 'NimDark'
+    | 'NimLight'
+    | 'NixDark'
+    | 'NixLight'
+    | 'NodeJSLight'
+    | 'NotionLight'
+    | 'NpmDark'
+    | 'NpmLight'
+    | 'NuxtJSDark'
+    | 'NuxtJSLight'
+    | 'OCaml'
+    | 'ObsidianDark'
+    | 'ObsidianLight'
+    | 'OctaveDark'
+    | 'OctaveLight'
+    | 'OpenCVDark'
+    | 'OpenCVLight'
+    | 'OpenShift'
+    | 'OpenStackDark'
+    | 'OpenStackLight'
+    | 'p5js'
+    | 'Perl'
+    | 'Photoshop'
+    | 'PHPLight'
+    | 'PhpStormDark'
+    | 'PhpStormLight'
+    | 'PiniaDark'
+    | 'PiniaLight'
+    | 'PklDark'
+    | 'PklLight'
+    | 'Plan9Dark'
+    | 'Plan9Light'
+    | 'PlanetScaleDark'
+    | 'PlanetScaleLight'
+    | 'PnpmDark'
+    | 'PnpmLight'
+    | 'PostgreSQLLight'
+    | 'Postman'
+    | 'PowershellDark'
+    | 'PowershellLight'
+    | 'Premiere'
+    | 'ProcessingDark'
+    | 'ProcessingLight'
+    | 'Prometheus'
+    | 'PugDark'
+    | 'PugLight'
+    | 'PyCharmDark'
+    | 'PyCharmLight'
+    | 'PyTorchDark'
+    | 'PyTorchLight'
+    | 'PythonLight'
+    | 'QTDark'
+    | 'QTLight'
+    | 'RDark'
+    | 'RLight'
+    | 'RabbitMQDark'
+    | 'RabbitMQLight'
+    | 'Rails'
+    | 'RaspberryPiDark'
+    | 'RaspberryPiLight'
+    | 'ReactLight'
+    | 'ReactiveXDark'
+    | 'ReactiveXLight'
+    | 'RedHatDark'
+    | 'RedHatLight'
+    | 'RedisLight'
+    | 'RegexDark'
+    | 'RegexLight'
+    | 'RemixDark'
+    | 'RemixLight'
+    | 'ReplitDark'
+    | 'ReplitLight'
+    | 'RiderDark'
+    | 'RiderLight'
+    | 'RobloxStudio'
+    | 'Rocket'
+    | 'RollupJSDark'
+    | 'RollupJSLight'
+    | 'ROSDark'
+    | 'ROSLight'
+    | 'Ruby'
+    | 'Rust'
+    | 'ScalaDark'
+    | 'ScalaLight'
+    | 'SciKitLearnLight'
+    | 'ScikitLearnDark'
+    | 'Selenium'
+    | 'Sentry'
+    | 'SequelizeDark'
+    | 'SequelizeLight'
+    | 'SketchupDark'
+    | 'SketchupLight'
+    | 'SolidJSDark'
+    | 'SolidJSLight'
+    | 'Solidity'
+    | 'SpringDark'
+    | 'SpringLight'
+    | 'SQLite'
+    | 'StackOverflowDark'
+    | 'StackOverflowLight'
+    | 'StyledComponents'
+    | 'SublimeDark'
+    | 'SublimeLight'
+    | 'SupabaseDark'
+    | 'SupabaseLight'
+    | 'Svelte'
+    | 'SVGDark'
+    | 'SVGLight'
+    | 'Swift'
+    | 'SymfonyDark'
+    | 'SymfonyLight'
+    | 'TailwindCSSLight'
+    | 'TauriDark'
+    | 'TauriLight'
+    | 'TensorFlowDark'
+    | 'TensorFlowLight'
+    | 'TerraformDark'
+    | 'TerraformLight'
+    | 'ThreeJSDark'
+    | 'ThreeJSLight'
+    | 'Twitter'
+    | 'UbuntuDark'
+    | 'UbuntuLight'
+    | 'UnityDark'
+    | 'UnityLight'
+    | 'UnrealEngine'
+    | 'VDark'
+    | 'VLight'
+    | 'Vala'
+    | 'VercelDark'
+    | 'VercelLight'
+    | 'VIMDark'
+    | 'VIMLight'
+    | 'VisualStudioDark'
+    | 'VisualStudioLight'
+    | 'ViteLight'
+    | 'VitestLight'
+    | 'VSCodeDark'
+    | 'VSCodeLight'
+    | 'VSCodiumDark'
+    | 'VSCodiumLight'
+    | 'VueJSDark'
+    | 'VueJSLight'
+    | 'VuetifyDark'
+    | 'VuetifyLight'
+    | 'WebAssembly'
+    | 'WebStormDark'
+    | 'WebStormLight'
+    | 'Webflow'
+    | 'WebpackDark'
+    | 'WebpackLight'
+    | 'WindiCSSDark'
+    | 'WindiCSSLight'
+    | 'WindowsDark'
+    | 'WindowsLight'
+    | 'Wordpress'
+    | 'WorkersDark'
+    | 'WorkersLight'
+    | 'XD'
+    | 'YarnDark'
+    | 'YarnLight'
+    | 'YewDark'
+    | 'YewLight'
+    | 'ZigDark'
+    | 'ZigLight';
   updatedAt: string;
   createdAt: string;
 }
@@ -212,6 +673,23 @@ export interface Project {
   id: number;
   title: string;
   summary: string;
+  myContribution?: string | null;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  slug: string;
   tags?:
     | {
         tag: string;
@@ -219,9 +697,105 @@ export interface Project {
       }[]
     | null;
   skills?: (number | Skill)[] | null;
-  status: 'planned' | 'in-progress' | 'completed';
+  mediaLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  people?: (number | Person)[] | null;
+  projectStatus: 'planned' | 'in-progress' | 'completed';
   startDate: string;
   thumbnail: number | Media;
+  gallery?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people".
+ */
+export interface Person {
+  id: number;
+  fullName: string;
+  canLogin: boolean;
+  profileImage?: (number | null) | Media;
+  socialMediaLink?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences".
+ */
+export interface Experience {
+  id: number;
+  title: string;
+  organization?: string | null;
+  description: string;
+  periodLabel: string;
+  startDate: string;
+  endDate?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificates".
+ */
+export interface Certificate {
+  id: number;
+  source: 'manual' | 'credly';
+  visible?: boolean | null;
+  externalId?: string | null;
+  title: string;
+  issuer: string;
+  description?: string | null;
+  issuedAt: string;
+  expiresAt?: string | null;
+  issuedTo?: string | null;
+  credentialIsPdf?: boolean | null;
+  credentialUrl?: string | null;
+  credentialFile?: (number | null) | Media;
+  globalActivityUrl?: string | null;
+  imageUsesUpload?: boolean | null;
+  sourceUpdatedAt?: string | null;
+  image?: (number | null) | Media;
+  imageUrl?: string | null;
+  skills?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Visible only in the admin panel. These files are not intended for public frontend use.
+   */
+  scans?: (number | CertificateScan)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commands".
+ */
+export interface Command {
+  id: number;
+  command: string;
+  description: string;
+  /**
+   * Use new lines to create multiple output rows in the terminal.
+   */
+  output: string;
+  visible?: boolean | null;
+  sortOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -258,6 +832,10 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'certificate-scans';
+        value: number | CertificateScan;
+      } | null)
+    | ({
         relationTo: 'visits';
         value: number | Visit;
       } | null)
@@ -268,6 +846,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'projects';
         value: number | Project;
+      } | null)
+    | ({
+        relationTo: 'people';
+        value: number | Person;
+      } | null)
+    | ({
+        relationTo: 'experiences';
+        value: number | Experience;
+      } | null)
+    | ({
+        relationTo: 'certificates';
+        value: number | Certificate;
+      } | null)
+    | ({
+        relationTo: 'commands';
+        value: number | Command;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -353,6 +947,24 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificate-scans_select".
+ */
+export interface CertificateScansSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "visits_select".
  */
 export interface VisitsSelect<T extends boolean = true> {
@@ -377,6 +989,9 @@ export interface SkillsSelect<T extends boolean = true> {
 export interface ProjectsSelect<T extends boolean = true> {
   title?: T;
   summary?: T;
+  myContribution?: T;
+  content?: T;
+  slug?: T;
   tags?:
     | T
     | {
@@ -384,9 +999,95 @@ export interface ProjectsSelect<T extends boolean = true> {
         id?: T;
       };
   skills?: T;
-  status?: T;
+  mediaLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  people?: T;
+  projectStatus?: T;
   startDate?: T;
   thumbnail?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "people_select".
+ */
+export interface PeopleSelect<T extends boolean = true> {
+  fullName?: T;
+  canLogin?: T;
+  profileImage?: T;
+  socialMediaLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences_select".
+ */
+export interface ExperiencesSelect<T extends boolean = true> {
+  title?: T;
+  organization?: T;
+  description?: T;
+  periodLabel?: T;
+  startDate?: T;
+  endDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certificates_select".
+ */
+export interface CertificatesSelect<T extends boolean = true> {
+  source?: T;
+  visible?: T;
+  externalId?: T;
+  title?: T;
+  issuer?: T;
+  description?: T;
+  issuedAt?: T;
+  expiresAt?: T;
+  issuedTo?: T;
+  credentialIsPdf?: T;
+  credentialUrl?: T;
+  credentialFile?: T;
+  globalActivityUrl?: T;
+  imageUsesUpload?: T;
+  sourceUpdatedAt?: T;
+  image?: T;
+  imageUrl?: T;
+  skills?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  scans?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "commands_select".
+ */
+export interface CommandsSelect<T extends boolean = true> {
+  command?: T;
+  description?: T;
+  output?: T;
+  visible?: T;
+  sortOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }

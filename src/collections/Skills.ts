@@ -23,7 +23,7 @@ export const Skills: CollectionConfig = {
       required: true,
       admin: {
         components: {
-          afterInput: ['@/app/(payload)/admin/components/SkillIconPreview#SkillIconPreview'],
+          Field: '@/app/(payload)/admin/components/SkillIconSelectField#SkillIconSelectField',
         },
       },
       options: skillIconOptions,

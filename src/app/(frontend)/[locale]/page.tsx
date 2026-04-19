@@ -4,11 +4,11 @@ import LandingPage from '@/app/(frontend)/Landing'
 import { isLocale } from '@/i18n/config'
 
 type HomePageProps = {
-  params: Promise<{ locale: string }> | { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export default async function HomePage({ params }: HomePageProps) {
-  const { locale } = await Promise.resolve(params)
+  const { locale } = await params
 
   if (!isLocale(locale)) {
     notFound()
@@ -16,3 +16,4 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return <LandingPage locale={locale} />
 }
+

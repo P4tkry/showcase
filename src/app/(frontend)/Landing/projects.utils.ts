@@ -1,7 +1,9 @@
 import type { Locale } from '@/i18n/config'
 import type { Project } from '@/payload-types'
 
-export const statusLabels: Record<Locale, Record<Project['status'], string>> = {
+type ProjectStatus = Project['projectStatus']
+
+export const statusLabels: Record<Locale, Record<ProjectStatus, string>> = {
   en: {
     planned: 'Planned',
     'in-progress': 'In progress',
@@ -14,10 +16,10 @@ export const statusLabels: Record<Locale, Record<Project['status'], string>> = {
   },
 }
 
-export const statusClasses: Record<Project['status'], string> = {
-  planned: 'border-sky-400/30 bg-sky-950/65 text-sky-200',
-  'in-progress': 'border-amber-400/30 bg-amber-950/65 text-amber-200',
-  completed: 'border-emerald-400/30 bg-emerald-950/65 text-emerald-200',
+export const statusClassNames: Record<ProjectStatus, string> = {
+  planned: 'border-amber-400/20 bg-amber-950/18 text-amber-100',
+  'in-progress': 'border-sky-400/20 bg-sky-950/18 text-sky-100',
+  completed: 'border-emerald-400/20 bg-emerald-950/18 text-emerald-100',
 }
 
 const tagClasses = [

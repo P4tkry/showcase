@@ -42,6 +42,17 @@ next-env.d.ts
 
 /media
 
+# deployment artifacts must stay local
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.swarm.yml
+deploy-swarm.ps1
+*.env
+*.env.*
+!.env.example
+certificate-scans/
+
 # Playwright
 node_modules/
 /test-results/

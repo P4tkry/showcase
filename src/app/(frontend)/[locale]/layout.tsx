@@ -16,12 +16,12 @@ const jetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 type LayoutProps = {
   children: React.ReactNode
-  params: Promise<{ locale: string }> | { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export default async function LocaleLayout(props: LayoutProps) {
   const { children, params } = props
-  const { locale } = await Promise.resolve(params)
+  const { locale } = await params
 
   if (!isLocale(locale)) {
     notFound()
@@ -37,4 +37,5 @@ export default async function LocaleLayout(props: LayoutProps) {
     </html>
   )
 }
+
 

@@ -8,11 +8,18 @@
 
 :root {
     --bg-base: #0b1b31;
+    --bg-gradient:
+        radial-gradient(circle at 10% 14%, rgb(56 189 248 / 0.2) 0%, rgb(56 189 248 / 0) 36%),
+        radial-gradient(circle at 84% 12%, rgb(249 115 22 / 0.16) 0%, rgb(249 115 22 / 0) 32%),
+        radial-gradient(circle at 52% 100%, rgb(59 130 246 / 0.14) 0%, rgb(59 130 246 / 0) 46%),
+        linear-gradient(180deg, #16294a 0%, #11203b 38%, #0b1628 100%);
 }
 
 html {
     min-height: 100%;
     background-color: var(--bg-base);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
 }
@@ -21,6 +28,8 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: var(--bg-base);
+    background-image: var(--bg-gradient);
+    background-attachment: fixed;
     color: rgb(229 231 235);
 }
 
@@ -30,6 +39,87 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     line-height: 1.75;
+}
+
+.project-article {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.project-article h1,
+.project-article h2,
+.project-article h3,
+.project-article h4,
+.project-article h5,
+.project-article h6 {
+    color: #fff;
+    line-height: 1.2;
+}
+
+.project-article h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.project-article h2 {
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+}
+
+.project-article h3 {
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+.project-article p,
+.project-article li {
+    color: rgb(209 213 219);
+    font-size: 0.98rem;
+    line-height: 1.9;
+}
+
+.project-article ul,
+.project-article ol {
+    padding-left: 1.25rem;
+}
+
+.project-article li[role='checkbox'],
+.project-article li:has(> input[type='checkbox']) {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.375rem;
+}
+
+.project-article input[type='checkbox'] {
+    margin-top: 0.35rem;
+    margin-right: 0.375rem;
+    flex-shrink: 0;
+}
+
+.project-article input[type='checkbox'] + span,
+.project-article input[type='checkbox'] + label,
+.project-article li[role='checkbox'] > span,
+.project-article li[role='checkbox'] > label {
+    margin-left: 0.375rem;
+}
+
+.project-article ul {
+    list-style: disc;
+}
+
+.project-article ol {
+    list-style: decimal;
+}
+
+.project-article a {
+    color: rgb(253 186 116);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.project-article blockquote {
+    border-left: 3px solid rgb(251 146 60 / 0.5);
+    color: rgb(229 231 235);
+    margin: 0;
+    padding-left: 1rem;
 }
 
 .snap-section {
@@ -149,30 +239,49 @@ p {
     color: rgb(251 146 60);
 }
 
-.hero-glow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    transform: translate3d(-9999px, -9999px, 0);
-    transition: opacity 220ms ease;
-    will-change: transform;
+.terminal-caret {
+    display: inline-block;
+    width: 0.75rem;
+    height: 1.1rem;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgb(103 232 249 / 0.95) 0%, rgb(34 211 238 / 0.75) 100%);
+    box-shadow: 0 0 18px rgb(34 211 238 / 0.3);
+    animation: terminal-caret-blink 1.15s steps(1) infinite;
 }
 
-.hero-glow[data-visible='true'] {
-    opacity: 1;
+@keyframes terminal-caret-blink {
+    0%,
+    48% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.15;
+    }
 }
 
-.hero-glow-shape {
-    position: absolute;
-    top: -340px;
-    left: -340px;
-    width: 680px;
-    height: 680px;
-    border-radius: 9999px;
-    background:
-        radial-gradient(circle at 50% 50%, rgb(37 99 235 / 0.22) 0%, rgb(30 64 175 / 0.22) 24%, rgb(30 58 138 / 0.2) 48%, rgb(23 37 84 / 0.14) 68%, rgb(15 23 42 / 0) 100%);
-    filter: blur(88px);
+.project-article-board h1,
+.project-article-board h2,
+.project-article-board h3,
+.project-article-board h4,
+.project-article-board h5,
+.project-article-board h6 {
+    color: #eef2f6;
+}
+
+.project-article-board p,
+.project-article-board li {
+    color: #aab5c0;
+}
+
+.project-article-board a {
+    color: #d9e1ea;
+}
+
+.project-article-board blockquote {
+    border-left-color: rgb(255 255 255 / 0.2);
+    color: #d9e1ea;
 }
 
 @media (max-width: 767px) {
@@ -193,11 +302,5 @@ p {
         margin-top: 0.6rem;
         font-size: 0.6875rem;
         letter-spacing: 0.14em;
-    }
-}
-
-@media (hover: none), (pointer: coarse) {
-    .hero-glow {
-        display: none;
     }
 }
