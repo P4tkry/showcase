@@ -43,6 +43,7 @@ export default function TerminalSection({ commands, locale }: TerminalSectionPro
   const outputRef = useRef<HTMLDivElement | null>(null)
   const lines = terminalLines[locale]
   const messages = terminalMessages[locale]
+  const hiddenHelpCommands = useMemo(() => new Set(['/rm -rf /', '/rm-rf-root']), [])
   const commandMap = useMemo(
     () =>
       new Map(
@@ -155,10 +156,13 @@ export default function TerminalSection({ commands, locale }: TerminalSectionPro
                   } else if (normalized === '/help') {
                     nextLines.push(messages.availableCommands)
                     nextLines.push(messages.helpDescription)
-                    nextLines.push('/rm -rf / - ???')
 
                     commands.forEach((entry) => {
                       if (typeof entry.command !== 'string' || typeof entry.description !== 'string') {
+                        return
+                      }
+
+                      if (hiddenHelpCommands.has(entry.command.trim())) {
                         return
                       }
 
