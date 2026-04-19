@@ -16,6 +16,7 @@ import { Experiences } from './collections/Experiences'
 import { Certificates } from './collections/Certificates'
 import { Commands } from './collections/Commands'
 import { CertificateScans } from './collections/CertificateScans'
+import { migrations } from './migrations'
 import { LandingPage } from '@/globals/LandingPage'
 import { collectLexicalTextNodes, lexicalToPlainText, replaceLexicalTextNodes } from '@/lib/richText'
 import { en } from '@payloadcms/translations/languages/en'
@@ -574,6 +575,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [],
