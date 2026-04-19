@@ -5,6 +5,9 @@ export const People: CollectionConfig = {
   admin: {
     useAsTitle: 'fullName',
   },
+  access: {
+    read: () => true,
+  },
   fields: [
     {
       name: 'fullName',
@@ -18,6 +21,9 @@ export const People: CollectionConfig = {
       type: 'checkbox',
       required: true,
       defaultValue: false,
+      access: {
+        read: ({ req }) => Boolean(req.user),
+      },
     },
     {
       name: 'profileImage',
